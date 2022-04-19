@@ -29,22 +29,6 @@ export default {
   },
   components: {
       OneArticle
-  },
-  data() {
-      return {
-          articles: [
-          ]
-      }
-  },
-  methods: {
-    addArticle: function(article) {
-      let newArticle = {
-        id: this.articles.length+1,
-        ...article
-      }
-      this.articles.push(newArticle);
-      console.log(article.title);
-    }
   }
 }
 </script>
