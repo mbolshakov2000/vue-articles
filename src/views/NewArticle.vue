@@ -1,33 +1,19 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <ul v-if="articles.length" style="display:flex;align-items: center; justify-content: center; flex-flow: row wrap;">
-      <OneArticle
-        v-for="article in articles"
-        style="width: 300px; height: 230px;"
-        :key="article.id"
-        :title="article.title"
-        :body="article.body"
-        :publish="article.publish"
-        :author="article.author"
-        
-      />
-    </ul>
-    <h3 v-else>
-        Сегодня без статей
-    </h3>
-  </div>
+ <div style="text-align:center;">
+   <ArticleForm title="New title" body="" author="" publish=""
+      v-on:add-article="addArticle" />
+ </div>
 </template>
 
 <script>
-import OneArticle from './OneArticle.vue'
+import ArticleForm from '../components/ArticleForm.vue'
 export default {
-  name: 'ArticleList',
+  name: 'NewArticle',
   props: {
-    msg: String
+      
   },
   components: {
-      OneArticle
+    ArticleForm
   },
   data() {
       return {
@@ -43,6 +29,7 @@ export default {
       }
       this.articles.push(newArticle);
       console.log(article.title);
+      this.$router.push('/');
     }
   },
   beforeMount: function(){
@@ -70,5 +57,11 @@ li {
 }
 a {
   color: #42b983;
+}
+.art{
+  border: thick double #32a1ce;
+}
+.notPublished{
+    color: red;
 }
 </style>
