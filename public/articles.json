@@ -1,0 +1,25 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "title": "Title 1",
+            "body": "Learn Vue",
+            "author": "Author 1",
+            "publish": true
+        },
+        {
+            "id": 2,
+            "title": "Title 2",
+            "body": "Learn about single-file components",
+            "author": "Author 2",
+            "publish": false
+        },
+        {
+            "id":3,
+            "title": "Title 3",
+            "body": "Fall in love",
+            "author": "Author 3",
+            "publish": true
+        }
+    ]
+}

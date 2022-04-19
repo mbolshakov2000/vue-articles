@@ -1,6 +1,6 @@
 <template>
-  <div class="art" v-bind:class="{ notPublished: !checked}">
-    <h2>{{title}}</h2>
+  <div class="art" style="width: 300px; height: 230px; text-align: center; margin-top: 20px;" v-bind:class="{ notPublished: !checked}">
+    <router-link style="font-size: 30px;" :to="articleUrl">{{title}}</router-link>
     <h2 v-bind:style="{fontFamily: authorFont}">{{authorCapitalLetters}}</h2>
     <h2>{{body}}</h2>
     <label><input type="checkbox" @click="checkChange()" v-bind:checked="checked">Опубликована</label>
@@ -11,6 +11,7 @@
 export default {
   name: 'OneArticle',
   props: {
+      id: Number,
       title: String,
       body: String,
       author: String,
@@ -29,6 +30,9 @@ export default {
     },
     authorCapitalLetters(){
       return this.author.toUpperCase()
+    },
+    articleUrl(){
+      return '/article/'+this.id;
     }
   },
   watch:{

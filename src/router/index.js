@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import NewArticle from '../views/NewArticle.vue'
 import OneArticle from '../components/OneArticle.vue'
-// import store from '../store'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -21,7 +21,7 @@ const routes = [
     {
         path: '/article/:id',
         component: OneArticle,
-        // props: (route) => store.state.articles.find((x) => x.id == route.params.id)
+        props: (route) => store.state.articles.find((x) => x.id == route.params.id)
     },
     {
         path: '/new',

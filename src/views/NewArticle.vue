@@ -27,16 +27,16 @@ export default {
         id: this.articles.length+1,
         ...article
       }
-      this.articles.push(newArticle);
+      this.$root.$data.state.articles.push(newArticle);
       console.log(article.title);
       this.$router.push('/');
     }
   },
   beforeMount: function(){
-    fetch('http://localhost:3000/articles')
-        // fetch('/articles.json')
+    // fetch('http://localhost:3000/articles')
+        fetch('/articles.json')
     .then(response => response.json())
-    .then(articles => this.articles = articles);
+    .then(articles => this.articles = articles.articles);
     console.log('Fetch data');
   }
 }

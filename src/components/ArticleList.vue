@@ -1,11 +1,11 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <ul v-if="articles.length" style="display:flex;align-items: center; justify-content: center; flex-flow: row wrap;">
+    <ul v-if="this.$root.$data.state.articles.length" style="display:flex;align-items: center; justify-content: center; flex-flow: row wrap;">
       <OneArticle
-        v-for="article in articles"
-        style="width: 300px; height: 230px;"
+        v-for="article in this.$root.$data.state.articles"
         :key="article.id"
+        :id = "article.id"
         :title="article.title"
         :body="article.body"
         :publish="article.publish"
@@ -21,6 +21,7 @@
 
 <script>
 import OneArticle from './OneArticle.vue'
+
 export default {
   name: 'ArticleList',
   props: {
@@ -44,13 +45,6 @@ export default {
       this.articles.push(newArticle);
       console.log(article.title);
     }
-  },
-  beforeMount: function(){
-    fetch('http://localhost:3000/articles')
-        // fetch('/articles.json')
-    .then(response => response.json())
-    .then(articles => this.articles = articles);
-    console.log('Fetch data');
   }
 }
 </script>
