@@ -7,8 +7,11 @@ import InputLine from './components/InputLine.vue'
 Vue.config.productionTip = false
 Vue.component('InputLine', InputLine);
 
+store.dispatch('fetchArticles');
+
 new Vue({
   router,
-  data: store,
-  render: h => h(App),
+  // data: store,
+  store,
+  render: h => h(App)
 }).$mount('#app')

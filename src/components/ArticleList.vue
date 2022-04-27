@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <ul v-if="this.$root.$data.state.articles.length" style="display:flex;align-items: center; justify-content: center; flex-flow: row wrap;">
+    <h1>{{ msg }}: {{ count }} шт.</h1>
+    <ul v-if="count" style="display:flex;align-items: center; justify-content: center; flex-flow: row wrap;">
       <OneArticle
-        v-for="article in this.$root.$data.state.articles"
+        v-for="article in articles"
         :key="article.id"
         :id = "article.id"
         :title="article.title"
@@ -21,7 +21,7 @@
 
 <script>
 import OneArticle from './OneArticle.vue'
-
+import {mapState} from 'vuex'
 export default {
   name: 'ArticleList',
   props: {
@@ -29,7 +29,11 @@ export default {
   },
   components: {
       OneArticle
-  }
+  },
+  computed: mapState({
+       count: state => state.articles.length,
+       articles: state => state.articles
+  })
 }
 </script>
 

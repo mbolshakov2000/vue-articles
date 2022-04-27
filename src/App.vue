@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import store from "@/store"
+// import store from "@/store"
 export default {
   name: 'App',
   components: {
   },
     beforeMount: function(){
-    store.loadArticlesAction();
+    // store.fetchArticles();
   }
 }
 </script>

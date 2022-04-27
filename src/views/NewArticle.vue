@@ -7,6 +7,7 @@
 
 <script>
 import ArticleForm from '../components/ArticleForm.vue'
+import store from '@/store'
 export default {
   name: 'NewArticle',
   props: {
@@ -18,10 +19,12 @@ export default {
   methods: {
     addArticle: function(article) {
       let newArticle = {
-        id: this.$root.$data.state.articles.length+1,
+        // id: this.$root.$data.state.articles.length+1,
+        id: store.state.articles.length+1,
         ...article
       }
-      this.$root.$data.state.articles.push(newArticle);
+      // this.$root.$data.state.articles.push(newArticle);
+      store.dispatch('addArticle', newArticle);
       console.log(article.title);
       this.$router.push('/');
     }

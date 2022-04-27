@@ -1,22 +1,30 @@
-var store = {
-    debug: true,
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+
+export default new Vuex.Store({
     state: {
         articles: []
     },
-    setArticlesAction(newValue) {
-        if (this.debug) console.log("setArticlesAction вызвано с ", newValue);
-        this.state.articles = newValue;
+    mutations:{
+        fetchArticles(state, articles){
+            state.articles = articles;
+        },
+        addArticle(state, article) {
+            state.articles.push(article);
+        }
     },
-    clearArticlesAction(){
-        if (this.debug) console.log("clearArticlesAction вызвано");
-        this.state.articles = "";
-    },
-    loadArticlesAction(){
-        // fetch('http://localhost:3000/articles')
-            fetch('/articles.json')
-        .then(response => response.json())
-        .then(articles => this.state.articles = articles.articles);
+    actions: {
+        fetchArticles(context){
+            // fetch('http://localhost:3000/articles')
+                fetch('/articles.json')
+            .then(response => response.json())
+            .then(articles => context.commit('fetchArticles', articles.articles));
+        },
+        addArticle(context, article){
+            context.commit('addArticle', article);
+        }
     }
-}
-
-export default store
+})
