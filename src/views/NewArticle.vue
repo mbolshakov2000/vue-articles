@@ -8,6 +8,7 @@
 <script>
 import ArticleForm from '../components/ArticleForm.vue'
 import store from '@/store'
+import {Types} from '../store/types.js'
 export default {
   name: 'NewArticle',
   props: {
@@ -23,8 +24,7 @@ export default {
         id: store.state.articles.length+1,
         ...article
       }
-      // this.$root.$data.state.articles.push(newArticle);
-      store.dispatch('addArticle', newArticle);
+      store.dispatch(Types.actions.ARTICLE_ADD, newArticle);
       console.log(article.title);
       this.$router.push('/');
     }
