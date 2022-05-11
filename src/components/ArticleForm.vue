@@ -1,17 +1,19 @@
 <template>
   <div class="hello">
-    <h2 style="margin-top: 100px">Добавить статью</h2>
-    <form>
+    <h2>Добавить статью</h2>
+    <v-form style="width: 50%; margin: 10px auto;">
         <div><InputLine placeholder="Title" v-model="article.title" /></div>
         <div><InputLine placeholder="Author" v-model="article.author" /></div>
-        <div><textarea v-model="article.body" placeholder="Body"></textarea></div>
-        <div><label><input type="checkbox" v-model="article.publish"> Published</label></div>
-        <div><input type="submit" value="Добавить" v-on:click.prevent="$emit('add-article',article)" /></div>
-    </form>
+        <div><v-textarea v-model="article.body" placeholder="Body"></v-textarea></div>
+        <div><v-checkbox :label="`Опубликована`" v-model="article.publish"></v-checkbox></div>
+        <div><AddButton color="success" type="submit" v-on:click.prevent="$emit('add-article',article)">статью</AddButton></div>
+        <!-- <div><v-btn color="success" type="submit" v-on:click.prevent="$emit('add-article',article)"> Добавить </v-btn></div> -->
+    </v-form>
   </div>
 </template>
 
 <script>
+import AddButton from './AddButton.js'
 export default {
   name: 'ArticleForm',
   props: {
@@ -19,6 +21,9 @@ export default {
     body: String,
     author: String,
     publish: Boolean
+  },
+  components: {
+    AddButton
   },
   data() {
       return {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/HomeView.vue'
 import NewArticle from '../views/NewArticle.vue'
 import OneArticle from '../components/OneArticle.vue'
 import store from '../store'
@@ -25,7 +25,7 @@ const routes = [
     },
     {
         path: '/new',
-        name: 'Add new article',
+        name: 'NewArticle',
         component: NewArticle
     }
 ]

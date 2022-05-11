@@ -1,7 +1,7 @@
 <template>
-  <input type="text" v-bind:placeholder="placeholder"
+  <v-text-field v-bind:placeholder="placeholder"
 v-bind:value="value"
-v-on:input="$emit('input', $event.target.value)">
+v-on:input="$emit('input', $event.target.value)"/>
 </template>
 
 <script>

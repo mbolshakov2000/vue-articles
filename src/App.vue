@@ -1,23 +1,65 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <p> Навигация: </p>
-      <div class="nav-link"><router-link to="/">Статьи</router-link></div>
-      <div class="nav-link"><router-link to="/new">Добавить статью</router-link></div>
-      <div class="nav-link"><router-link to="/about">О нас</router-link></div>
-  </div>
-  <router-view/>
-  </div>
+  <v-app>
+    <v-navigation-drawer v-model="drawer" app>
+      <v-icon style="float: right; margin:3px;" large @click.stop="drawer = !drawer">
+        mdi-window-close
+      </v-icon>
+      <p style="margin: 5px; font-size: 20px;"> Навигация: </p>
+      <v-list>
+          <v-list-item :to="{ name: 'Home'}">
+            <v-list-item-action>
+              <v-icon>mdi-book-open-outline</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Статьи</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="{ name: 'NewArticle'}">
+            <v-list-item-action>
+              <v-icon>mdi-plus</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Добавить статью</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="{ name: 'AboutUs'}">
+            <v-list-item-action>
+              <v-icon>mdi-information-outline</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>О нас</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title></v-toolbar-title>
+    </v-app-bar>
+    <v-main>
+      <v-container fluid>
+        <router-view/>
+      </v-container>
+    </v-main>
+    <v-footer app>
+      <div>Это футер
+      </div>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-// import store from "@/store"
 export default {
   name: 'App',
-  components: {
-  },
-    beforeMount: function(){
-    // store.fetchArticles();
+  data: () => ({
+      drawer: false,
+      group: null,
+    }),
+
+    watch: {
+      group () {
+        this.drawer = false
+      },
   }
 }
 </script>

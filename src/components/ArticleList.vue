@@ -2,15 +2,55 @@
   <div class="hello">
     <h1>{{ msg }}: {{ count }} шт.</h1>
     <div v-if="articles_status == REQUESTED">
-      <p> Пожалуйста, подождите... </p>
-      <div class="progress-bar">
-        <div class="progress-bar-value"></div>
+      <div class="text-center">
+        <div><v-progress-circular
+        indeterminate :size="50"
+        color="primary">
+        </v-progress-circular></div>
+        <p> Пожалуйста, подождите... </p>
+        <v-btn
+          color="red lighten-2"
+          dark
+          @click="dialog = true"
+        >
+          Отменить
+        </v-btn>
+
+        <v-dialog
+          v-model="dialog"
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title class="text-h5">
+              Отменить загрузку?
+            </v-card-title>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="dialog = false"
+              >
+                Нет
+              </v-btn>
+
+              <v-btn
+                color="green darken-1"
+                text
+                @click="cancel"
+              >
+                Да
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </div>
-      <button @click="cancel">Отменить</button>
     </div>
     <div v-else-if="articles_status == FAILED">
-      <p>Произошла ошибка: "{{articles_error}}" </p>
-      <button v-on:click="reloadArticles">Обновить</button>
+      <p style="margin-top: 5px;">Произошла ошибка: "{{articles_error}}" </p>
+      <v-btn v-on:click="reloadArticles">Обновить</v-btn>
     </div>
     <div v-else-if="count" style="display:flex;align-items: center; justify-content: center; flex-flow: row wrap;">
       <OneArticle
@@ -41,6 +81,11 @@ export default {
   components: {
       OneArticle
   },
+  data() {
+    return {
+      dialog: false,
+    }
+  },
   computed: mapState({
     count: state => state.articles.length,
     articles: state => state.articles,
@@ -52,6 +97,7 @@ export default {
       this.$store.dispatch(Types.actions.ARTICLES_LOAD);
     },
     cancel() {
+      this.dialog = false;
       this.$store.dispatch(Types.actions.ARTICLES_LOAD_CANCEL);
     }
   },
@@ -105,5 +151,9 @@ a {
   100% {
     transform:  translateX(100%) scaleX(0.5);
   }
+}
+
+.v-progress-circular {
+  margin: 1rem;
 }
 </style>

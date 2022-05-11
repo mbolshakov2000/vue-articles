@@ -8,7 +8,7 @@
 import ArticleList from '../components/ArticleList.vue'
 // App -> Home
 export default {
-  name: 'App',
+  name: 'HomeView',
   components: {
     ArticleList
   }

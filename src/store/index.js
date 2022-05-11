@@ -12,8 +12,10 @@ Vue.use(VueAxios, axios)
 export default new Vuex.Store({
   state: {
     articles: [],
+    workers: [],
     articles_error: "",
     articles_status: "",
+    workers_status: ""
   },
   cancel_source: null,
   mutations: {
@@ -30,6 +32,13 @@ export default new Vuex.Store({
     },
     ARTICLE_ADD_REQUESTED(state, article) {
       state.articles.push(article);
+    },
+    WORKERS_REQUESTED(state) {
+      state.workers_status = Types.request_status.REQUESTED;
+    },
+    WORKERS_SUCCEEDED(state, workers){
+      state.workers = workers;
+      state.workers_status = Types.request_status.SUCCEEDED;
     }
   },
   actions: {
@@ -41,6 +50,9 @@ export default new Vuex.Store({
     },
     ARTICLE_ADD(context, article) {
         context.commit(Types.mutations.ARTICLE_ADD_REQUESTED, article);
-    }
+    },
+    WORKERS_LOAD(context) {
+      loadArticlesModule.fetchWorkers(context);
+    },
   }
 })
